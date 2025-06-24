@@ -1,0 +1,2280 @@
+{
+	"info": {
+		"_postman_id": "756683f4-d00b-453b-aa2a-1f4123635625",
+		"name": "API Cinema",
+		"description": "Coleção de testes baseada nos cenários mapeados",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44549129",
+		"_collection_link": "https://wesley-9466076.postman.co/workspace/Wesley's-Workspace~3e30563d-e262-4999-8b72-caedb10bd40e/collection/44549129-756683f4-d00b-453b-aa2a-1f4123635625?action=share&source=collection_link&creator=44549129"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "2. Tentar registrar usuário com e-mail já existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.equal(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a success field that is a boolean\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('success').that.is.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a message field that is a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"The message field must not be empty\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.exist.and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Usuario Duplicado\",\n  \"email\": \"usuario@teste.com\",\n  \"password\": \"senha123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Realizar login com credenciais válidas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response schema matches the expected structure\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('success').that.is.a('boolean');",
+									"    pm.expect(responseData).to.have.property('data').that.is.an('object');",
+									"",
+									"    const data = responseData.data;",
+									"    pm.expect(data).to.have.property('_id').that.is.a('string');",
+									"    pm.expect(data).to.have.property('name').that.is.a('string');",
+									"    pm.expect(data).to.have.property('email').that.is.a('string');",
+									"    pm.expect(data).to.have.property('role').that.is.a('string');",
+									"    pm.expect(data).to.have.property('token').that.is.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Token is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist.and.to.be.an('object');",
+									"    pm.expect(responseData.data.token).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Email is in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.have.property('email').that.is.a('string').and.satisfies(email => {",
+									"        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;",
+									"        return emailRegex.test(email);",
+									"    }, \"Email format is invalid\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"regularuser@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1. Registrar novo usuário com dados válidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Regular User2\",\n  \"email\": \"regularuser2@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Obter perfil do usuário autenticado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the schema of the data object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object').that.has.property('data').that.is.an('object');",
+									"    pm.expect(responseData.data).to.have.all.keys('_id', 'name', 'email', 'role');",
+									"",
+									"    pm.expect(responseData.data._id).to.be.a('string');",
+									"    pm.expect(responseData.data.name).to.be.a('string');",
+									"    pm.expect(responseData.data.email).to.be.a('string').that.matches(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/, \"Email format is invalid\");",
+									"    pm.expect(responseData.data.role).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Name is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('object').that.has.property('name').that.is.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Email is in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('object').that.has.property('email').that.is.a('string').and.satisfies(email => {",
+									"        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;",
+									"        return emailRegex.test(email);",
+									"    }, \"Email format is invalid\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Tentar realizar login com senha incorreta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 401\", function () {",
+									"    pm.expect(pm.response.code).to.equal(401);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a success field that is a boolean\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.success).to.exist.and.to.be.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a message field that is a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response schema is valid\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"passwordErrado\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Tentar obter perfil sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 401\", function () {",
+									"    pm.expect(pm.response.code).to.equal(401);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields: success and message\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Success is a boolean value\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Atualizar nome do perfil do usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the structure of the 'data' object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('object').that.includes.keys('_id', 'name', 'email', 'role', 'token');",
+									"    ",
+									"    pm.expect(responseData.data._id).to.be.a('string');",
+									"    pm.expect(responseData.data.name).to.be.a('string');",
+									"    pm.expect(responseData.data.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/); // Valid email format",
+									"    pm.expect(responseData.data.role).to.be.a('string');",
+									"    pm.expect(responseData.data.token).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Email is in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('object');",
+									"    ",
+									"    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;",
+									"    pm.expect(responseData.data.email).to.match(emailPattern, \"Email format is invalid\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Token must be a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('object').that.has.property('token').that.is.a('string').and.is.not.empty;",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"User Admin\",\n  \"currentPassword\": \"password123\",\n  \"newPassword\": \"password321\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filmes",
+			"item": [
+				{
+					"name": "1. Listar todos os filmes (público)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON = pm.response.json();",
+									"",
+									"// Test the response body structure",
+									"pm.test(\"Response body structure is valid\", function () {",
+									"    pm.expect(responseJSON).to.have.property('success').that.is.a('boolean');",
+									"    pm.expect(responseJSON).to.have.property('count').that.is.a('number');",
+									"    pm.expect(responseJSON).to.have.property('pagination').that.is.an('object');",
+									"    pm.expect(responseJSON).to.have.property('data').that.is.an('array');",
+									"});",
+									"",
+									"// Test that the data array is not empty",
+									"pm.test(\"Data array contains the list of movies\", function () {",
+									"    pm.expect(responseJSON.data.length).to.be.greaterThan(0, \"Data array should not be empty\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/movies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Obter detalhes de um filme por ID (público)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON = pm.response.json();",
+									"",
+									"// Test if the success field exists and check its value",
+									"pm.test(\"Response indicates if the movie was found\", function () {",
+									"    pm.expect(responseJSON).to.have.property('success').that.is.a('boolean');",
+									"    console.log(responseJSON.success ? \"Movie found successfully.\" : \"Movie not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/movies/{{movieId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies",
+								"{{movieId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Tentar obter filme com ID inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 404\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a valid JSON schema\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Success field is of boolean type\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"The message field must be a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/movies/invalid-id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies",
+								"invalid-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Criar novo filme (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {",
+									"    pm.expect(pm.response.code).to.eql(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response content type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the 'data' object contains required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist.and.to.be.an('object').that.includes.all.keys(",
+									"        'title', 'synopsis', 'director', 'genres', 'duration', ",
+									"        'classification', 'poster', 'releaseDate', '_id', ",
+									"        'createdAt', 'updatedAt', '__v', 'id'",
+									"    );",
+									"});",
+									"",
+									"",
+									"pm.test(\"Title must be a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist;",
+									"    pm.expect(responseData.data.title).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Duration is a non-negative integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.have.property('duration').that.is.a('number').and.to.be.at.least(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Filme Teste\",\n  \"description\": \"Descrição do filme teste\",\n  \"releaseDate\": \"2025\",\n  \"duration\": 100,\n  \"director\": \"Cassio\",\n  \"classification\": \"PG-13\",\n  \"synopsis\": \"Sinopse do filme\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/movies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Excluir um filme (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response contains success field and it is true\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('success').that.is.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a message field that is a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response should contain success and message fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/movies/{{movieId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies",
+								"{{movieId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Tentar criar filme sem ser admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 401\", function () {",
+									"    pm.expect(pm.response.code).to.equal(401);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Success field is a boolean\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.have.property('success').that.is.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"The message field must be a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Filme Não Autorizado\",\n  \"description\": \"Descrição\",\n  \"duration\": 90,\n  \"releaseDate\": 2025,\n  \"classification\": \"PG18\",\n  \"genre\": \"Drama\",\n  \"director\": \"Cassio\",\n  \"synopsis\": \"Sinopse\",\n  \"rating\": \"PG\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/movies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Tentar excluir um filme como usuário comum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a success field of type boolean\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.success).to.exist.and.to.be.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a message field of type string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"});",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/movies/{{movieId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies",
+								"{{movieId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sessões",
+			"item": [
+				{
+					"name": "Bug",
+					"item": [
+						{
+							"name": "5. Tentar criar uma sessão como usuário comum",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{userToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"movieId\": \"{{movieId}}\",\n  \"theaterId\": \"{{theaterId}}\",\n  \"startTime\": \"2024-01-15T19:00:00Z\",\n  \"price\": 25.00\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/sessions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sessions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6. Tentar criar sessão para filme inexistente",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{adminToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"movieId\": \"invalid-movie-id\",\n  \"theaterId\": \"{{theaterId}}\",\n  \"startTime\": \"2024-01-15T19:00:00Z\",\n  \"price\": 25.00\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/sessions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sessions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "7. Resetar assentos de uma sessão (Admin)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{adminToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/sessions/{{sessionId}}/reset-seats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sessions",
+										"{{sessionId}}",
+										"reset-seats"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Criar nova sessão (Admin)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{adminToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"movieId\": \"{{movieId}}\",\n  \"theaterId\": \"{{theaterId}}\",\n  \"startTime\": \"2024-01-15T19:00:00Z\",\n  \"price\": 25.00\n}\n\n"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/sessions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sessions"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "1. Listar todas as sessões (público)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the schema of the response object\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    // Check that the root object is an object",
+									"    pm.expect(responseData).to.be.an('object');",
+									"",
+									"    // Check for the existence of properties in the root object",
+									"    pm.expect(responseData).to.have.all.keys('success', 'count', 'pagination', 'data');",
+									"",
+									"    // Validate 'success' property",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"",
+									"    // Validate 'count' property",
+									"    pm.expect(responseData.count).to.be.a('number');",
+									"",
+									"    // Validate 'pagination' property",
+									"    pm.expect(responseData.pagination).to.be.an('object');",
+									"    pm.expect(responseData.pagination).to.have.all.keys('next');",
+									"    pm.expect(responseData.pagination.next).to.have.all.keys('page', 'limit');",
+									"    pm.expect(responseData.pagination.next.page).to.be.a('number');",
+									"    pm.expect(responseData.pagination.next.limit).to.be.a('number');",
+									"",
+									"    // Validate 'data' property",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"",
+									"    responseData.data.forEach(item => {",
+									"        pm.expect(item).to.be.an('object');",
+									"        pm.expect(item).to.have.all.keys('_id', 'movie', 'theater', 'datetime', 'fullPrice', 'halfPrice', 'seats', 'createdAt', '__v', 'updatedAt', 'id');",
+									"",
+									"        // Validate 'movie' property",
+									"        pm.expect(item.movie).to.be.an('object');",
+									"        pm.expect(item.movie).to.have.all.keys('_id', 'title', 'duration', 'poster', 'id');",
+									"        pm.expect(item.movie.title).to.be.a('string');",
+									"        pm.expect(item.movie.duration).to.be.a('number');",
+									"",
+									"        // Validate 'theater' property",
+									"        pm.expect(item.theater).to.be.an('object');",
+									"        pm.expect(item.theater).to.have.all.keys('_id', 'name', 'type', 'id');",
+									"        pm.expect(item.theater.name).to.be.a('string');",
+									"",
+									"        // Validate 'seats' property",
+									"        pm.expect(item.seats).to.be.an('array');",
+									"        item.seats.forEach(seat => {",
+									"            pm.expect(seat).to.be.an('object');",
+									"            pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
+									"            pm.expect(seat.row).to.be.a('string');",
+									"            pm.expect(seat.number).to.be.a('number');",
+									"            pm.expect(seat.status).to.be.a('string');",
+									"        });",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Count field is a non-negative integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.count).to.be.a('number').and.to.be.at.least(0);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);",
+									"});",
+									"",
+									"pm.test(\"Response contains required fields in data array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"",
+									"    responseData.data.forEach(function(item) {",
+									"        pm.expect(item).to.have.property('_id').that.is.a('string');",
+									"        pm.expect(item).to.have.property('movie').that.is.an('object');",
+									"        pm.expect(item).to.have.property('theater').that.is.an('object');",
+									"        pm.expect(item).to.have.property('datetime').that.is.a('string');",
+									"        pm.expect(item).to.have.property('fullPrice').that.is.a('number');",
+									"        pm.expect(item).to.have.property('halfPrice').that.is.a('number');",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/sessions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Filtrar sessões por filme",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'count', 'pagination', 'data');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the schema of the data object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"",
+									"    responseData.data.forEach(function(session) {",
+									"        pm.expect(session).to.be.an('object');",
+									"        pm.expect(session).to.have.all.keys('_id', 'movie', 'theater', 'datetime', 'fullPrice', 'halfPrice', 'seats', 'createdAt', '__v', 'updatedAt', 'id');",
+									"",
+									"        pm.expect(session.fullPrice).to.be.a('number');",
+									"        pm.expect(session.halfPrice).to.be.a('number');",
+									"        pm.expect(session.datetime).to.be.a('string').that.is.not.empty;",
+									"",
+									"        session.seats.forEach(function(seat) {",
+									"            pm.expect(seat).to.be.an('object');",
+									"            pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
+									"            pm.expect(seat.row).to.be.a('string').that.is.not.empty;",
+									"            pm.expect(seat.number).to.be.a('number');",
+									"            pm.expect(seat.status).to.be.a('string');",
+									"        });",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Seats array is present and contains expected fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('array').that.is.not.empty;",
+									"",
+									"    responseData.data.forEach(session => {",
+									"        pm.expect(session.seats).to.be.an('array').that.is.not.empty;",
+									"        ",
+									"        session.seats.forEach(seat => {",
+									"            pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
+									"            pm.expect(seat.row).to.be.a('string');",
+									"            pm.expect(seat.number).to.be.a('number');",
+									"            pm.expect(seat.status).to.be.a('string');",
+									"        });",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/sessions?movie={{movieId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions"
+							],
+							"query": [
+								{
+									"key": "movie",
+									"value": "{{movieId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Obter detalhes de uma sessão por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"The Theater object has valid fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object').that.has.property('data').that.is.an('object');",
+									"    const theater = responseData.data.theater;",
+									"",
+									"    pm.expect(theater).to.be.an('object').that.includes.all.keys('_id', 'name', 'capacity', 'type', 'createdAt', '__v', 'updatedAt', 'id');",
+									"});",
+									"",
+									"pm.test(\"Seats array contains objects with valid fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.have.property('seats').that.is.an('array').that.is.not.empty;",
+									"",
+									"    responseData.data.seats.forEach(seat => {",
+									"        pm.expect(seat).to.be.an('object');",
+									"        pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
+									"        pm.expect(seat.row).to.be.a('string');",
+									"        pm.expect(seat.number).to.be.a('number');",
+									"        pm.expect(seat.status).to.be.a('string');",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/sessions/{{sessionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions",
+								"{{sessionId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservas",
+			"item": [
+				{
+					"name": "Bug",
+					"item": [
+						{
+							"name": "1. Criar reserva com assentos disponíveis",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{userToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"seats\": [\"A1\", \"A2\"]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Tentar criar reserva para assento ocupado",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{userToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"seats\": [\"A1\"]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Tentar criar reserva sem autenticação",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"seats\": [\"B1\"]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Listar \"Minhas Reservas\"",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{userToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reservations/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservations",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. Cancelar/Excluir uma reserva (Admin)",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{adminToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reservations/{{reservationId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservations",
+										"{{reservationId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6. Validar se assentos ficam disponiveis após cancelamento",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/sessions/{{sessionId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"sessions",
+										"{{sessionId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Salas",
+			"item": [
+				{
+					"name": "1. Listar todas as salas (público)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has required fields: success, count, and data\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'count', 'data');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the schema of the data object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('data').that.is.an('array');",
+									"",
+									"    responseData.data.forEach(function(item) {",
+									"        pm.expect(item).to.be.an('object');",
+									"        pm.expect(item).to.have.all.keys('_id', 'name', 'capacity', 'type', 'createdAt', '__v', 'updatedAt', 'id');",
+									"        ",
+									"        pm.expect(item.name).to.be.a('string');",
+									"        pm.expect(item.capacity).to.be.a('number');",
+									"        pm.expect(item.type).to.be.a('string');",
+									"        pm.expect(item.createdAt).to.be.a('string');",
+									"        pm.expect(item.updatedAt).to.be.a('string');",
+									"        pm.expect(item.__v).to.be.a('number');",
+									"        pm.expect(item.id).to.be.a('string');",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Capacity is a non-negative integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"",
+									"    responseData.data.forEach(function(theater) {",
+									"        pm.expect(theater.capacity).to.be.a('number').and.to.be.at.least(0);",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/theaters",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theaters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Obter detalhes de uma sala por ID (público)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(350);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields in the data object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist.and.to.be.an('object');",
+									"    pm.expect(responseData.data).to.have.all.keys('_id', 'name', 'capacity', 'type', 'createdAt', '__v', 'updatedAt', 'sessions', 'id');",
+									"    ",
+									"    responseData.data.sessions.forEach(session => {",
+									"        pm.expect(session).to.have.all.keys('_id', 'movie', 'theater', 'datetime', 'fullPrice', 'halfPrice', 'seats', 'createdAt', '__v', 'updatedAt', 'id');",
+									"        ",
+									"        session.seats.forEach(seat => {",
+									"            pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
+									"        });",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Sessions array is present and contains at least one session object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data.sessions).to.be.an('array').that.is.not.empty;",
+									"    pm.expect(responseData.data.sessions).to.satisfy(function(sessions) {",
+									"        return sessions.every(session => {",
+									"            return pm.expect(session).to.be.an('object').that.includes.keys('_id', 'movie', 'theater', 'datetime', 'fullPrice', 'halfPrice', 'seats', 'createdAt', '__v', 'updatedAt', 'id');",
+									"        });",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate that the session object has non-empty movie and theater fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data.sessions).to.be.an('array').that.is.not.empty;",
+									"",
+									"    responseData.data.sessions.forEach(session => {",
+									"        pm.expect(session.movie).to.exist.and.to.have.lengthOf.at.least(1, \"Movie field should not be empty\");",
+									"        pm.expect(session.theater).to.exist.and.to.have.lengthOf.at.least(1, \"Theater field should not be empty\");",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/theaters/{{theaterId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theaters",
+								"{{theaterId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Criar uma nova sala (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {",
+									"    pm.expect(pm.response.code).to.eql(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the schema of the data object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('object').that.includes.all.keys('name', 'capacity', 'type', '_id', 'createdAt', 'updatedAt', '__v', 'id');",
+									"",
+									"    pm.expect(responseData.data.name).to.be.a('string');",
+									"    pm.expect(responseData.data.capacity).to.be.a('number');",
+									"    pm.expect(responseData.data.type).to.be.a('string');",
+									"    pm.expect(responseData.data._id).to.be.a('string');",
+									"    pm.expect(responseData.data.createdAt).to.be.a('string');",
+									"    pm.expect(responseData.data.updatedAt).to.be.a('string');",
+									"    pm.expect(responseData.data.__v).to.be.a('number');",
+									"    pm.expect(responseData.data.id).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Name is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist.and.to.be.an('object');",
+									"    pm.expect(responseData.data.name).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Capacity must be a positive integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist;",
+									"    pm.expect(responseData.data.capacity).to.be.a('number').and.to.be.above(0, \"Capacity should be a positive integer\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cinema Teste2\",\n  \"location\": \"Shopping Center\",\n  \"capacity\": 150,\n  \"screens\": 8\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theaters",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theaters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Excluir uma sala (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response contains success field that is true\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('success', true);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a valid schema matching the expected structure\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Message field should be a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/theaters/{{theaterId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theaters",
+								"{{theaterId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Tentar criar sala como usuário comum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 403\", function () {",
+									"    pm.expect(pm.response.code).to.equal(403);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response contains a success field with a boolean value\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('success').that.is.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response message is a string and can be empty\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response structure is valid\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cinema Não Autorizado\",\n  \"location\": \"Local Teste\",\n  \"capacity\": 100,\n  \"screens\": 4\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/theaters",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"theaters"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "1. Listar todos os usuários (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the structure of the 'data' array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"",
+									"    responseData.data.forEach(user => {",
+									"        pm.expect(user).to.be.an('object');",
+									"        pm.expect(user).to.have.all.keys('_id', 'name', 'email', 'role', 'createdAt', 'updatedAt', '__v');",
+									"        pm.expect(user.name).to.be.a('string').that.is.not.empty;",
+									"        pm.expect(user.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);",
+									"        pm.expect(user.role).to.be.a('string').that.is.not.empty;",
+									"        pm.expect(user.createdAt).to.be.a('string').that.is.not.empty;",
+									"        pm.expect(user.updatedAt).to.be.a('string').that.is.not.empty;",
+									"        pm.expect(user.__v).to.be.a('number');",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Each user object contains the required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"    ",
+									"    responseData.data.forEach(user => {",
+									"        pm.expect(user).to.have.all.keys('_id', 'name', 'email', 'role', 'createdAt', 'updatedAt', '__v');",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Email is in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    ",
+									"    responseData.data.forEach(function(user) {",
+									"        pm.expect(user.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/, \"Email format is invalid\");",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Obter detalhes de um usuário por ID (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response Content-Type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the structure of the 'data' object\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist.and.to.be.an('object');",
+									"    ",
+									"    pm.expect(responseData.data).to.have.all.keys('_id', 'name', 'email', 'role', 'createdAt', 'updatedAt', '__v');",
+									"    ",
+									"    pm.expect(responseData.data._id).to.be.a('string');",
+									"    pm.expect(responseData.data.name).to.be.a('string');",
+									"    pm.expect(responseData.data.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);",
+									"    pm.expect(responseData.data.role).to.be.a('string');",
+									"    pm.expect(responseData.data.createdAt).to.be.a('string');",
+									"    pm.expect(responseData.data.updatedAt).to.be.a('string');",
+									"    pm.expect(responseData.data.__v).to.be.a('number');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Email is in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.have.property('email').that.matches(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/, \"Email format is invalid\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"CreatedAt and UpdatedAt are in a valid date format\", function () {",
+									"    const responseData = pm.response.json().data;",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(new Date(responseData.createdAt).getTime()).to.not.be.NaN;",
+									"    pm.expect(new Date(responseData.updatedAt).getTime()).to.not.be.NaN;",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Atualizar dados de um usuário (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a valid Content-Type of application/json\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the schema of the response data object\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('success').that.is.a('boolean');",
+									"    ",
+									"    const data = responseData.data;",
+									"    pm.expect(data).to.be.an('object');",
+									"    pm.expect(data).to.have.all.keys('_id', 'name', 'email', 'role');",
+									"",
+									"    pm.expect(data._id).to.be.a('string');",
+									"    pm.expect(data.name).to.be.a('string').and.to.have.lengthOf.at.least(1);",
+									"    pm.expect(data.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);",
+									"    pm.expect(data.role).to.be.a('string').and.to.have.lengthOf.at.least(1);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Name must be a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist;",
+									"    pm.expect(responseData.data.name).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Email is in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist;",
+									"    pm.expect(responseData.data.email).to.exist;",
+									"    pm.expect(responseData.data.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/, \"Email format is invalid\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Regular Atualizado\",\n  \"email\": \"user@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Excluir um usuário (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has a success field that is true\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object').that.has.property('success', true);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response matches the expected schema\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.all.keys('success', 'message');",
+									"    pm.expect(responseData.success).to.be.a('boolean');",
+									"    pm.expect(responseData.message).to.be.a('string');",
+									"});",
+									"",
+									"",
+									"pm.test(\"The message field must be a string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Tentar listar usuários como usuário comum",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "{{baseUrl}}",
+			"type": "string"
+		},
+		{
+			"key": "userToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "movieId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "sessionId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "theaterId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "reservationId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
