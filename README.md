@@ -153,6 +153,18 @@ Contribuições são bem-vindas! Para adicionar novos testes, por favor, siga as
 3.  **Documentação**: Adicione documentação aos seus casos de teste e keywords usando a tag `[Documentation]` do Robot Framework.
 4.  **Pull Requests**: Crie uma branch para sua nova feature ou correção (`git checkout -b feature/meu-novo-teste`) e abra um Pull Request para a branch `main` com uma descrição clara das suas alterações.
 
+## Autor
+
+**WESLEY CASSIO**
+
+Analista de QA / Engenheiro de Software e automação de testes com foco na criação de estratégias de qualidade robustas e escaláveis. Este projeto foi desenvolvido como um portfólio para demonstrar habilidades em automação de testes de API e Frontend utilizando Robot Framework e como parte de um challenge na CompassUOL, além de demonstrar boas práticas de documentação e gerenciamento de testes.
+
+Sinta-se à vontade para se conectar ou explorar outros projetos:
+
+- **E-mail**: `Wesleycassio.sp@gmail.com`
+- **LinkedIn**: `www.linkedin.com/in/wesley-cassio-a7815b253`
+- **GitHub**: `https://github.com/Casx1/`
+
 ## Licença
 
 Este projeto está sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
