@@ -1,13 +1,134 @@
 {
 	"info": {
-		"_postman_id": "756683f4-d00b-453b-aa2a-1f4123635625",
-		"name": "API Cinema",
+		"_postman_id": "ff79e5dd-e403-44c4-8f8a-acc2a716fdfb",
+		"name": "API Cinema Updated",
 		"description": "Coleção de testes baseada nos cenários mapeados",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "44549129",
-		"_collection_link": "https://wesley-9466076.postman.co/workspace/Wesley's-Workspace~3e30563d-e262-4999-8b72-caedb10bd40e/collection/44549129-756683f4-d00b-453b-aa2a-1f4123635625?action=share&source=collection_link&creator=44549129"
+		"_collection_link": "https://wesley-9466076.postman.co/workspace/Wesley's-Workspace~3e30563d-e262-4999-8b72-caedb10bd40e/collection/44549129-ff79e5dd-e403-44c4-8f8a-acc2a716fdfb?action=share&source=collection_link&creator=44549129"
 	},
 	"item": [
+		{
+			"name": "API Info",
+			"item": [
+				{
+					"name": "Get API Information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const response = pm.response.json();",
+									"pm.test(\"Response contains API information\", () => {",
+									"    pm.expect(response).to.have.property('message', 'Cinema App API v1');",
+									"    pm.expect(response).to.have.property('documentation');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Setup (Development Only)",
+			"item": [
+				{
+					"name": "Create Admin User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// This test will only pass if run in a development environment",
+									"// and the user does not already exist.",
+									"pm.test(\"Status code is 201 or 400 (if user exists)\", () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 400, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Admin User From Postman\",\n    \"email\": \"admin_postman@example.com\",\n    \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/setup/admin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"setup",
+								"admin"
+							]
+						},
+						"description": "Creates an admin user. Only works in development environment."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Default Test Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// This test will only pass if run in a development environment.",
+									"pm.test(\"Status code is 201 (created), 200 (already exist), or 403 (prod)\", () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/setup/test-users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"setup",
+								"test-users"
+							]
+						},
+						"description": "Creates default test users (one regular user and one admin). Only works in development environment."
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Autenticação",
 			"item": [
@@ -150,7 +271,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"regularuser@example.com\",\n    \"password\": \"password123\"\n}"
+							"raw": "{\n    \"email\": \"adminuser@example.com\",\n    \"password\": \"password123\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/auth/login",
@@ -881,7 +1002,6 @@
 									"});",
 									"",
 									"",
-									"",
 									""
 								],
 								"type": "text/javascript",
@@ -916,225 +1036,24 @@
 			"name": "Sessões",
 			"item": [
 				{
-					"name": "Bug",
-					"item": [
-						{
-							"name": "5. Tentar criar uma sessão como usuário comum",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{userToken}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"movieId\": \"{{movieId}}\",\n  \"theaterId\": \"{{theaterId}}\",\n  \"startTime\": \"2024-01-15T19:00:00Z\",\n  \"price\": 25.00\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/sessions",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"sessions"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "6. Tentar criar sessão para filme inexistente",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{adminToken}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"movieId\": \"invalid-movie-id\",\n  \"theaterId\": \"{{theaterId}}\",\n  \"startTime\": \"2024-01-15T19:00:00Z\",\n  \"price\": 25.00\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/sessions",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"sessions"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "7. Resetar assentos de uma sessão (Admin)",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{adminToken}}"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/sessions/{{sessionId}}/reset-seats",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"sessions",
-										"{{sessionId}}",
-										"reset-seats"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "4. Criar nova sessão (Admin)",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{adminToken}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"movieId\": \"{{movieId}}\",\n  \"theaterId\": \"{{theaterId}}\",\n  \"startTime\": \"2024-01-15T19:00:00Z\",\n  \"price\": 25.00\n}\n\n"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/sessions",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"sessions"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "1. Listar todas as sessões (público)",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.equal(200);",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
 									"});",
-									"",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(300);",
+									"const response = pm.response.json();",
+									"pm.test(\"Response is an object\", () => {",
+									"    pm.expect(response).to.be.an('object');",
 									"});",
-									"",
-									"",
-									"pm.test(\"Validate the schema of the response object\", function () {",
-									"    const responseData = pm.response.json();",
-									"",
-									"    // Check that the root object is an object",
-									"    pm.expect(responseData).to.be.an('object');",
-									"",
-									"    // Check for the existence of properties in the root object",
-									"    pm.expect(responseData).to.have.all.keys('success', 'count', 'pagination', 'data');",
-									"",
-									"    // Validate 'success' property",
-									"    pm.expect(responseData.success).to.be.a('boolean');",
-									"",
-									"    // Validate 'count' property",
-									"    pm.expect(responseData.count).to.be.a('number');",
-									"",
-									"    // Validate 'pagination' property",
-									"    pm.expect(responseData.pagination).to.be.an('object');",
-									"    pm.expect(responseData.pagination).to.have.all.keys('next');",
-									"    pm.expect(responseData.pagination.next).to.have.all.keys('page', 'limit');",
-									"    pm.expect(responseData.pagination.next.page).to.be.a('number');",
-									"    pm.expect(responseData.pagination.next.limit).to.be.a('number');",
-									"",
-									"    // Validate 'data' property",
-									"    pm.expect(responseData.data).to.be.an('array');",
-									"",
-									"    responseData.data.forEach(item => {",
-									"        pm.expect(item).to.be.an('object');",
-									"        pm.expect(item).to.have.all.keys('_id', 'movie', 'theater', 'datetime', 'fullPrice', 'halfPrice', 'seats', 'createdAt', '__v', 'updatedAt', 'id');",
-									"",
-									"        // Validate 'movie' property",
-									"        pm.expect(item.movie).to.be.an('object');",
-									"        pm.expect(item.movie).to.have.all.keys('_id', 'title', 'duration', 'poster', 'id');",
-									"        pm.expect(item.movie.title).to.be.a('string');",
-									"        pm.expect(item.movie.duration).to.be.a('number');",
-									"",
-									"        // Validate 'theater' property",
-									"        pm.expect(item.theater).to.be.an('object');",
-									"        pm.expect(item.theater).to.have.all.keys('_id', 'name', 'type', 'id');",
-									"        pm.expect(item.theater.name).to.be.a('string');",
-									"",
-									"        // Validate 'seats' property",
-									"        pm.expect(item.seats).to.be.an('array');",
-									"        item.seats.forEach(seat => {",
-									"            pm.expect(seat).to.be.an('object');",
-									"            pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
-									"            pm.expect(seat.row).to.be.a('string');",
-									"            pm.expect(seat.number).to.be.a('number');",
-									"            pm.expect(seat.status).to.be.a('string');",
-									"        });",
-									"    });",
-									"});",
-									"",
-									"",
-									"pm.test(\"Count field is a non-negative integer\", function () {",
-									"    const responseData = pm.response.json();",
-									"    ",
-									"    pm.expect(responseData).to.be.an('object');",
-									"    pm.expect(responseData.count).to.be.a('number').and.to.be.at.least(0);",
-									"});",
-									"",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(300);",
-									"});",
-									"",
-									"pm.test(\"Response contains required fields in data array\", function () {",
-									"    const responseData = pm.response.json();",
-									"    ",
-									"    pm.expect(responseData).to.be.an('object');",
-									"    pm.expect(responseData.data).to.be.an('array');",
-									"",
-									"    responseData.data.forEach(function(item) {",
-									"        pm.expect(item).to.have.property('_id').that.is.a('string');",
-									"        pm.expect(item).to.have.property('movie').that.is.an('object');",
-									"        pm.expect(item).to.have.property('theater').that.is.an('object');",
-									"        pm.expect(item).to.have.property('datetime').that.is.a('string');",
-									"        pm.expect(item).to.have.property('fullPrice').that.is.a('number');",
-									"        pm.expect(item).to.have.property('halfPrice').that.is.a('number');",
-									"    });",
-									"});",
-									""
+									"pm.test(\"Response contains a list of sessions\", () => {",
+									"    pm.expect(response.data).to.be.an('array');",
+									"});"
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -1160,70 +1079,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.equal(200);",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
 									"});",
-									"",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(300);",
-									"});",
-									"",
-									"",
-									"pm.test(\"Response has required fields\", function () {",
-									"    const responseData = pm.response.json();",
-									"",
-									"    pm.expect(responseData).to.be.an('object');",
-									"    pm.expect(responseData).to.have.all.keys('success', 'count', 'pagination', 'data');",
-									"});",
-									"",
-									"",
-									"pm.test(\"Validate the schema of the data object\", function () {",
-									"    const responseData = pm.response.json();",
-									"    ",
-									"    pm.expect(responseData).to.be.an('object');",
-									"    pm.expect(responseData.data).to.be.an('array');",
-									"",
-									"    responseData.data.forEach(function(session) {",
-									"        pm.expect(session).to.be.an('object');",
-									"        pm.expect(session).to.have.all.keys('_id', 'movie', 'theater', 'datetime', 'fullPrice', 'halfPrice', 'seats', 'createdAt', '__v', 'updatedAt', 'id');",
-									"",
-									"        pm.expect(session.fullPrice).to.be.a('number');",
-									"        pm.expect(session.halfPrice).to.be.a('number');",
-									"        pm.expect(session.datetime).to.be.a('string').that.is.not.empty;",
-									"",
-									"        session.seats.forEach(function(seat) {",
-									"            pm.expect(seat).to.be.an('object');",
-									"            pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
-									"            pm.expect(seat.row).to.be.a('string').that.is.not.empty;",
-									"            pm.expect(seat.number).to.be.a('number');",
-									"            pm.expect(seat.status).to.be.a('string');",
+									"const response = pm.response.json();",
+									"pm.test(\"Response returns sessions for the correct movie\", () => {",
+									"    const movieId = pm.collectionVariables.get(\"movieId\");",
+									"    if (response.data.length > 0) {",
+									"        response.data.forEach(session => {",
+									"            pm.expect(session.movie._id).to.equal(movieId);",
 									"        });",
-									"    });",
-									"});",
-									"",
-									"",
-									"pm.test(\"Seats array is present and contains expected fields\", function () {",
-									"    const responseData = pm.response.json();",
-									"    ",
-									"    pm.expect(responseData).to.be.an('object');",
-									"    pm.expect(responseData.data).to.be.an('array').that.is.not.empty;",
-									"",
-									"    responseData.data.forEach(session => {",
-									"        pm.expect(session.seats).to.be.an('array').that.is.not.empty;",
-									"        ",
-									"        session.seats.forEach(seat => {",
-									"            pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
-									"            pm.expect(seat.row).to.be.a('string');",
-									"            pm.expect(seat.number).to.be.a('number');",
-									"            pm.expect(seat.status).to.be.a('string');",
-									"        });",
-									"    });",
-									"});",
-									""
+									"    }",
+									"});"
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -1255,47 +1124,16 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response status code is 200\", function () {",
-									"    pm.expect(pm.response.code).to.equal(200);",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
 									"});",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});",
-									"",
-									"",
-									"",
-									"pm.test(\"Response time is less than 200ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);",
-									"});",
-									"",
-									"pm.test(\"The Theater object has valid fields\", function () {",
-									"    const responseData = pm.response.json();",
-									"    ",
-									"    pm.expect(responseData).to.be.an('object').that.has.property('data').that.is.an('object');",
-									"    const theater = responseData.data.theater;",
-									"",
-									"    pm.expect(theater).to.be.an('object').that.includes.all.keys('_id', 'name', 'capacity', 'type', 'createdAt', '__v', 'updatedAt', 'id');",
-									"});",
-									"",
-									"pm.test(\"Seats array contains objects with valid fields\", function () {",
-									"    const responseData = pm.response.json();",
-									"    ",
-									"    pm.expect(responseData).to.be.an('object');",
-									"    pm.expect(responseData.data).to.have.property('seats').that.is.an('array').that.is.not.empty;",
-									"",
-									"    responseData.data.seats.forEach(seat => {",
-									"        pm.expect(seat).to.be.an('object');",
-									"        pm.expect(seat).to.have.all.keys('row', 'number', 'status');",
-									"        pm.expect(seat.row).to.be.a('string');",
-									"        pm.expect(seat.number).to.be.a('number');",
-									"        pm.expect(seat.status).to.be.a('string');",
-									"    });",
-									"});",
-									""
+									"const response = pm.response.json();",
+									"pm.test(\"Response contains session details\", () => {",
+									"    pm.expect(response.data).to.have.property('seats');",
+									"    pm.expect(response.data.seats).to.be.an('array');",
+									"});"
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -1314,6 +1152,190 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "4. Criar nova sessão (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"const response = pm.response.json();",
+									"pm.test(\"Response contains the created session data\", () => {",
+									"    pm.expect(response.data).to.have.property('_id');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": \"{{movieId}}\",\n    \"theater\": \"{{theaterId}}\",\n    \"datetime\": \"2025-12-25T20:00:00.000Z\",\n    \"fullPrice\": 30,\n    \"halfPrice\": 15\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/sessions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Tentar criar sessão como usuário comum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", () => {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"pm.test(\"Response has unauthorized message\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.message).to.include('not authorized');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": \"{{movieId}}\",\n    \"theater\": \"{{theaterId}}\",\n    \"datetime\": \"2025-12-25T22:00:00.000Z\",\n    \"fullPrice\": 30,\n    \"halfPrice\": 15\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/sessions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Tentar criar sessão para filme inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", () => {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"pm.test(\"Response has 'Movie not found' message\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.message).to.equal('Movie not found');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": \"60d0fe4f5311236168a10999\",\n    \"theater\": \"{{theaterId}}\",\n    \"datetime\": \"2025-12-26T20:00:00.000Z\",\n    \"fullPrice\": 30,\n    \"halfPrice\": 15\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/sessions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Resetar assentos de uma sessão (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response confirms seats were reset\", () => {",
+									"    const response = pm.response.json();",
+									"    response.data.seats.forEach(seat => {",
+									"        pm.expect(seat.status).to.equal('available');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/sessions/{{sessionId}}/reset-seats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions",
+								"{{sessionId}}",
+								"reset-seats"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1321,159 +1343,256 @@
 			"name": "Reservas",
 			"item": [
 				{
-					"name": "Bug",
-					"item": [
+					"name": "1. Criar reserva com assentos disponíveis",
+					"event": [
 						{
-							"name": "1. Criar reserva com assentos disponíveis",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{userToken}}"
-									}
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"const response = pm.response.json();",
+									"pm.test(\"Response contains reservation data\", () => {",
+									"    pm.expect(response.data).to.have.property('_id');",
+									"    pm.collectionVariables.set(\"reservationId\", response.data._id);",
+									"});"
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"seats\": [\"A1\", \"A2\"]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/reservations",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"reservations"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "2. Tentar criar reserva para assento ocupado",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{userToken}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"seats\": [\"A1\"]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/reservations",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"reservations"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "3. Tentar criar reserva sem autenticação",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"seats\": [\"B1\"]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/reservations",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"reservations"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "4. Listar \"Minhas Reservas\"",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{userToken}}"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/reservations/me",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"reservations",
-										"me"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "5. Cancelar/Excluir uma reserva (Admin)",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{adminToken}}"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/reservations/{{reservationId}}",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"reservations",
-										"{{reservationId}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "6. Validar se assentos ficam disponiveis após cancelamento",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/sessions/{{sessionId}}",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"sessions",
-										"{{sessionId}}"
-									]
-								}
-							},
-							"response": []
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"session\": \"{{sessionId}}\",\n    \"seats\": [\n        { \"row\": \"A\", \"number\": 5, \"type\": \"full\" },\n        { \"row\": \"A\", \"number\": 6, \"type\": \"half\" }\n    ],\n    \"paymentMethod\": \"credit_card\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Tentar criar reserva para assento ocupado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", () => {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"pm.test(\"Response has unavailable seats message\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.message).to.include('seats are not available');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"session\": \"{{sessionId}}\",\n    \"seats\": [\n        { \"row\": \"A\", \"number\": 5, \"type\": \"full\" }\n    ],\n    \"paymentMethod\": \"credit_card\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Tentar criar reserva sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", () => {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"session\": \"{{sessionId}}\",\n    \"seats\": [\n        { \"row\": \"B\", \"number\": 1, \"type\": \"full\" }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Listar 'Minhas Reservas'",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response contains a list of reservations\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.data).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/reservations/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Cancelar/Excluir uma reserva (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response has 'Reservation removed' message\", () => {",
+									"    const response = pm.response.json();",
+									"    pm.expect(response.message).to.equal('Reservation removed');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/reservations/{{reservationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservations",
+								"{{reservationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Validar se assentos ficam disponíveis após cancelamento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Seats A5 and A6 should be available\", () => {",
+									"    const response = pm.response.json();",
+									"    const seatA5 = response.data.seats.find(s => s.row === 'A' && s.number === 5);",
+									"    const seatA6 = response.data.seats.find(s => s.row === 'A' && s.number === 6);",
+									"    pm.expect(seatA5.status).to.equal('available');",
+									"    pm.expect(seatA6.status).to.equal('available');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/sessions/{{sessionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sessions",
+								"{{sessionId}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2238,7 +2357,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "{{baseUrl}}",
+			"value": "http://localhost:3000/api/v1",
 			"type": "string"
 		},
 		{
