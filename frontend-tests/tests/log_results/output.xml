@@ -1,0 +1,2411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.1 (Python 3.13.5 on darwin)" generated="2025-06-27T00:42:44.225802" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests">
+<suite id="s1-s1" name="Test Authentication" source="/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/test_authentication.robot">
+<test id="s1-s1-t1" name="Scenario: Register with valid data" line="12">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:44.363893" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/b83690a7-e177-4f5d-b8e1-62bc781a755e"}</msg>
+<msg time="2025-06-27T00:42:44.378050" level="INFO">Starting Browser process /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/Browser/wrapper/index.js using at 127.0.0.1:53728</msg>
+<msg time="2025-06-27T00:42:46.046969" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/b83690a7-e177-4f5d-b8e1-62bc781a755e"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:44.363569" elapsed="1.683648"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:46.049282" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:46.059671" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:46.059737" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.047583" elapsed="0.012216"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:46.680271" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.059927" elapsed="0.620515"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:44.363136" elapsed="2.317422"/>
+</kw>
+<kw name="Go To Register Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:46.810538" level="INFO">Successfully opened URL http://localhost:3002/register</msg>
+<arg>${BASE_URL}/register</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.681206" elapsed="0.129467"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:46.680906" elapsed="0.129859"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:42:46.811298" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995766@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:42:46.811022" elapsed="0.000300"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:46.812027" level="INFO">Fills the text 'Usuario Teste' in the given field.</msg>
+<arg>id=name</arg>
+<arg>${user['name']}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.811501" elapsed="0.053990"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:46.866439" level="INFO">Fills the text 'usuario1750995766@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${user['email']}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.865895" elapsed="0.006462"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:46.873812" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${user['password']}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.872717" elapsed="0.009440"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:46.882916" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=confirmPassword</arg>
+<arg>${user['password']}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.882374" elapsed="0.006223"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:46.889094" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.888764" elapsed="0.043267"/>
+</kw>
+<kw name="Verify Registration Success" owner="login_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:47.248788" level="INFO">Waited for Element with selector text="Conta criada com sucesso!" at state visible</msg>
+<arg>text="Conta criada com sucesso!"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:46.932530" elapsed="0.316374"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<msg time="2025-06-27T00:42:47.250420" level="INFO">${current_url} = http://localhost:3002/</msg>
+<var>${current_url}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.249033" elapsed="0.001410"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${current_url}</arg>
+<arg>${BASE_URL}/</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.250550" elapsed="0.000185"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:47.257243" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.250989" elapsed="0.006362"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:47.262002" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.257697" elapsed="0.004377"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:47.264692" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.262232" elapsed="0.002518"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:47.250833" elapsed="0.013964"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:46.932265" elapsed="0.332556"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:42:47.389085" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.265187" elapsed="0.124089"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:47.265025" elapsed="0.124362"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:44.362771" elapsed="3.026700"/>
+</test>
+<test id="s1-s1-t2" name="Scenario: Attempt to register with mismatching passwords" line="22">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:47.393994" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/38d38437-a436-4065-87b0-1a8202a9e240"}</msg>
+<msg time="2025-06-27T00:42:47.644244" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/38d38437-a436-4065-87b0-1a8202a9e240"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.393554" elapsed="0.250862"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:47.645813" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:47.650778" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:47.650889" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.644644" elapsed="0.006493"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:48.272348" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:47.651486" elapsed="0.621008"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:47.393341" elapsed="0.879243"/>
+</kw>
+<kw name="Go To Register Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:48.391585" level="INFO">Successfully opened URL http://localhost:3002/register</msg>
+<arg>${BASE_URL}/register</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.273230" elapsed="0.118493"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:48.272778" elapsed="0.119030"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:42:48.392299" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995768@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:42:48.392081" elapsed="0.000234"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:48.393069" level="INFO">Fills the text 'Usuario Teste' in the given field.</msg>
+<arg>id=name</arg>
+<arg>${user['name']}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.392478" elapsed="0.052726"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:48.446229" level="INFO">Fills the text 'usuario1750995768@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${user['email']}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.445548" elapsed="0.005678"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:48.452046" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${user['password']}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.451410" elapsed="0.005167"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:48.457613" level="INFO">Fills the text 'wrongpassword' in the given field.</msg>
+<arg>id=confirmPassword</arg>
+<arg>wrongpassword</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.457211" elapsed="0.006694"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:48.464520" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.464176" elapsed="0.032396"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:48.499485" level="INFO">Waited for Element with selector text="As senhas não coincidem." at state visible</msg>
+<arg>text="As senhas não coincidem."</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.496756" elapsed="0.002801"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:42:48.597126" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.499942" elapsed="0.097282"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:48.499763" elapsed="0.097523"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:47.392407" elapsed="1.204940"/>
+</test>
+<test id="s1-s1-t3" name="Scenario: Login with valid credentials" line="32">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:48.600730" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/8c28029f-9f62-49f8-99cc-54d0610278b3"}</msg>
+<msg time="2025-06-27T00:42:48.854730" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/8c28029f-9f62-49f8-99cc-54d0610278b3"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.600349" elapsed="0.254648"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:48.857657" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:48.863393" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:48.863447" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.855458" elapsed="0.008032"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:49.614770" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:48.863611" elapsed="0.751300"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:48.600159" elapsed="1.014838"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:42:49.615383" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995769@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:42:49.615168" elapsed="0.000236"/>
+</kw>
+<kw name="Register User Via API" owner="api_keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:49.615906" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-27T00:42:49.615805" elapsed="0.000277"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-27T00:42:49.616397" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.616187" elapsed="0.000230"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:49.797069" level="INFO">POST Request : url=http://localhost:3000/api/v1/auth/register 
+ path_url=/api/v1/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "Usuario Teste", "email": "usuario1750995769@teste.com", "password": "senha123"}' 
+ </msg>
+<msg time="2025-06-27T00:42:49.797159" level="INFO">POST Response : url=http://localhost:3000/api/v1/auth/register 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '315', 'ETag': 'W/"13b-53WfBBlfK8Q+WpJ8o0MXRwXGV10"', 'Date': 'Fri, 27 Jun 2025 03:42:49 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"685e13393cace397f6f22a6d","name":"Usuario Teste","email":"usuario1750995769@teste.com","role":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NWUxMzM5M2NhY2UzOTdmNmYyMmE2ZCIsImlhdCI6MTc1MDk5NTc2OSwiZXhwIjoxNzUxMDgyMTY5fQ.mr54W-SbgBbyywUBynE5BLIbTr0WGXz7JDNkWnfMd64"}} 
+ </msg>
+<msg time="2025-06-27T00:42:49.797246" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/api/v1/auth/register</arg>
+<arg>json=${user_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.616498" elapsed="0.180765"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-06-27T00:42:49.797829" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.797401" elapsed="0.000463"/>
+</kw>
+<arg>${user}</arg>
+<doc>Cadastra um novo usuário diretamente via API para preparar
+o ambiente de teste de forma rápida e confiável.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.615565" elapsed="0.182347"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:49.870616" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.798229" elapsed="0.072716"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:49.798049" elapsed="0.073050"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:49.872251" level="INFO">Fills the text 'usuario1750995769@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.871969" elapsed="0.052989"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:49.925778" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.925102" elapsed="0.006683"/>
+</kw>
+<arg>${user['email']}</arg>
+<arg>${user['password']}</arg>
+<status status="PASS" start="2025-06-27T00:42:49.871368" elapsed="0.060512"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:49.932688" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.932366" elapsed="0.035129"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:49.932091" elapsed="0.035490"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:50.157152" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:49.967994" elapsed="0.189444"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:50.162760" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:50.157659" elapsed="0.005199"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:50.166013" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:50.162981" elapsed="0.003120"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:49.967752" elapsed="0.198415"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:42:50.270135" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:42:50.166596" elapsed="0.103648"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:50.166404" elapsed="0.103910"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:48.599348" elapsed="1.671024"/>
+</test>
+<test id="s1-s1-t4" name="Scenario: Attempt login with incorrect password" line="40">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:50.274313" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/eab490fd-58e1-4c24-be5f-b7022ac0d87e"}</msg>
+<msg time="2025-06-27T00:42:50.520149" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/eab490fd-58e1-4c24-be5f-b7022ac0d87e"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:50.273847" elapsed="0.246442"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:50.522278" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:50.526717" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:50.526768" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:50.521275" elapsed="0.005535"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:51.289826" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:50.526931" elapsed="0.763102"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:50.273516" elapsed="1.016616"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:42:51.290675" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995771@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:42:51.290445" elapsed="0.000250"/>
+</kw>
+<kw name="Register User Via API" owner="api_keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:51.291328" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-27T00:42:51.291220" elapsed="0.000221"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-27T00:42:51.291805" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.291600" elapsed="0.000225"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:51.467929" level="INFO">POST Request : url=http://localhost:3000/api/v1/auth/register 
+ path_url=/api/v1/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "Usuario Teste", "email": "usuario1750995771@teste.com", "password": "senha123"}' 
+ </msg>
+<msg time="2025-06-27T00:42:51.467993" level="INFO">POST Response : url=http://localhost:3000/api/v1/auth/register 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '315', 'ETag': 'W/"13b-9zQJCKbCkO4s2ZnC32Yhw524Oqo"', 'Date': 'Fri, 27 Jun 2025 03:42:51 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"685e133b3cace397f6f22a7d","name":"Usuario Teste","email":"usuario1750995771@teste.com","role":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NWUxMzNiM2NhY2UzOTdmNmYyMmE3ZCIsImlhdCI6MTc1MDk5NTc3MSwiZXhwIjoxNzUxMDgyMTcxfQ.nAMw0jPqO1mO8Qbx2G6Y4v8IrbOHo91SaLPl6Ky5sdg"}} 
+ </msg>
+<msg time="2025-06-27T00:42:51.468082" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/api/v1/auth/register</arg>
+<arg>json=${user_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.291935" elapsed="0.176164"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-06-27T00:42:51.468591" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.468220" elapsed="0.000405"/>
+</kw>
+<arg>${user}</arg>
+<doc>Cadastra um novo usuário diretamente via API para preparar
+o ambiente de teste de forma rápida e confiável.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.290932" elapsed="0.177763"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:51.541842" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.469030" elapsed="0.073138"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:51.468828" elapsed="0.073434"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:51.543207" level="INFO">Fills the text 'usuario1750995771@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.542938" elapsed="0.052209"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:51.595691" level="INFO">Fills the text 'some_wrong_password' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.595324" elapsed="0.005251"/>
+</kw>
+<arg>${user['email']}</arg>
+<arg>some_wrong_password</arg>
+<status status="PASS" start="2025-06-27T00:42:51.542489" elapsed="0.058165"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:51.601373" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.601055" elapsed="0.030380"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:51.600797" elapsed="0.030722"/>
+</kw>
+<kw name="Verify Login Has Failed" owner="login_page">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-06-27T00:42:52.633635" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.631920" elapsed="1.002189"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<msg time="2025-06-27T00:42:52.641036" level="INFO">${current_url} = http://localhost:3002/login</msg>
+<var>${current_url}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" start="2025-06-27T00:42:52.634772" elapsed="0.006318"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${current_url}</arg>
+<arg>${BASE_URL}/login</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:42:52.641321" elapsed="0.000361"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:52.657542" level="INFO">Waited for Element with selector nav &gt;&gt; text=Minhas Reservas at state hidden</msg>
+<arg>nav &gt;&gt; text=Minhas Reservas</arg>
+<arg>hidden</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:52.641843" elapsed="0.015849"/>
+</kw>
+<doc>Verifica se o login falhou, checando se a URL continua
+sendo a de login e se o cabeçalho não mudou.</doc>
+<status status="PASS" start="2025-06-27T00:42:51.631696" elapsed="1.026099"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:42:52.766044" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:42:52.658527" elapsed="0.107626"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:52.658148" elapsed="0.108069"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:50.272592" elapsed="2.493695"/>
+</test>
+<test id="s1-s1-t5" name="Scenario: Update user name in profile" line="48">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:52.769695" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/6e021b47-9cdb-4575-8022-1d2dadec0c26"}</msg>
+<msg time="2025-06-27T00:42:53.014861" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/6e021b47-9cdb-4575-8022-1d2dadec0c26"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:52.769305" elapsed="0.245772"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:53.016386" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:53.023680" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:53.023889" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.015236" elapsed="0.008937"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:53.616371" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.024439" elapsed="0.592091"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:52.769093" elapsed="0.847533"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:42:53.617170" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995773@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:42:53.616943" elapsed="0.000246"/>
+</kw>
+<kw name="Register User Via API" owner="api_keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:53.617683" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-27T00:42:53.617592" elapsed="0.000202"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-27T00:42:53.618018" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.617877" elapsed="0.000158"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:53.797337" level="INFO">POST Request : url=http://localhost:3000/api/v1/auth/register 
+ path_url=/api/v1/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "Usuario Teste", "email": "usuario1750995773@teste.com", "password": "senha123"}' 
+ </msg>
+<msg time="2025-06-27T00:42:53.797396" level="INFO">POST Response : url=http://localhost:3000/api/v1/auth/register 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '315', 'ETag': 'W/"13b-Xo767UEYq0+Ouu92+eygEAumpgs"', 'Date': 'Fri, 27 Jun 2025 03:42:53 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"685e133d3cace397f6f22a89","name":"Usuario Teste","email":"usuario1750995773@teste.com","role":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NWUxMzNkM2NhY2UzOTdmNmYyMmE4OSIsImlhdCI6MTc1MDk5NTc3MywiZXhwIjoxNzUxMDgyMTczfQ.vv6ClvXVPSMXB3QNQZF_qXe0-f-UJunrQkrA6FnYY2c"}} 
+ </msg>
+<msg time="2025-06-27T00:42:53.797543" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/api/v1/auth/register</arg>
+<arg>json=${user_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.618105" elapsed="0.179455"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-06-27T00:42:53.798123" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.797677" elapsed="0.000484"/>
+</kw>
+<arg>${user}</arg>
+<doc>Cadastra um novo usuário diretamente via API para preparar
+o ambiente de teste de forma rápida e confiável.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.617347" elapsed="0.180869"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:53.879183" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.798563" elapsed="0.080900"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:53.798360" elapsed="0.081277"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:53.880805" level="INFO">Fills the text 'usuario1750995773@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.880519" elapsed="0.053104"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:53.934275" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.933892" elapsed="0.041902"/>
+</kw>
+<arg>${user['email']}</arg>
+<arg>${user['password']}</arg>
+<status status="PASS" start="2025-06-27T00:42:53.879908" elapsed="0.096082"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:53.976734" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:53.976464" elapsed="0.039929"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:53.976235" elapsed="0.040241"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:54.222363" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.016880" elapsed="0.205796"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:54.227925" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.222881" elapsed="0.005153"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:54.233117" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.228179" elapsed="0.005004"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:54.016645" elapsed="0.216591"/>
+</kw>
+<kw name="Go To Profile" owner="profile_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:54.233738" level="INFO">Clicks the element 'text=Perfil'.</msg>
+<arg>text=Perfil</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.233551" elapsed="0.082126"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:54.233366" elapsed="0.082388"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:54.318633" level="INFO">Waited for Element with selector h1:text("Meu Perfil") at state visible</msg>
+<arg>h1:text("Meu Perfil")</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.315881" elapsed="0.002832"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-06-27T00:42:54.319159" level="INFO">${new_name} = Usuario TesteAtualizado</msg>
+<var>${new_name}</var>
+<arg>SEPARATOR=</arg>
+<arg>${user['name']}</arg>
+<arg>Atualizado</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.318855" elapsed="0.000318"/>
+</kw>
+<kw name="Update User Name" owner="profile_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:54.319644" level="INFO">Fills the text 'Usuario TesteAtualizado' in the given field.</msg>
+<arg>id=name</arg>
+<arg>${new_name}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.319451" elapsed="0.007065"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:54.327013" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.326706" elapsed="0.037743"/>
+</kw>
+<arg>${new_name}</arg>
+<status status="PASS" start="2025-06-27T00:42:54.319289" elapsed="0.045249"/>
+</kw>
+<kw name="Verify Name Update" owner="profile_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:54.544957" level="INFO">Waited for Element with selector text="Perfil atualizado com sucesso" at state visible</msg>
+<arg>text="Perfil atualizado com sucesso"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.364965" elapsed="0.180128"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2025-06-27T00:42:54.558366" level="INFO">Text: 'Usuario TesteAtualizado'</msg>
+<arg>id=name</arg>
+<arg>==</arg>
+<arg>${new_name}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.545268" elapsed="0.013178"/>
+</kw>
+<arg>${new_name}</arg>
+<status status="PASS" start="2025-06-27T00:42:54.364710" elapsed="0.194035"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:42:54.670938" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.559337" elapsed="0.111700"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:54.559065" elapsed="0.112035"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:52.768257" elapsed="1.902902"/>
+</test>
+<test id="s1-s1-t6" name="Scenario: Logout from account" line="61">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:54.674592" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/4fdbf4b6-9595-4542-90d7-59260f063968"}</msg>
+<msg time="2025-06-27T00:42:54.921929" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/4fdbf4b6-9595-4542-90d7-59260f063968"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.674206" elapsed="0.247866"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:54.923177" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:54.928156" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:54.928290" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.922245" elapsed="0.006269"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:55.600490" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:54.928912" elapsed="0.671707"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:54.673998" elapsed="0.926691"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:42:55.601015" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995775@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:42:55.600830" elapsed="0.000201"/>
+</kw>
+<kw name="Register User Via API" owner="api_keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:55.601389" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-27T00:42:55.601319" elapsed="0.000146"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-27T00:42:55.601638" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.601528" elapsed="0.000122"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:55.778723" level="INFO">POST Request : url=http://localhost:3000/api/v1/auth/register 
+ path_url=/api/v1/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "Usuario Teste", "email": "usuario1750995775@teste.com", "password": "senha123"}' 
+ </msg>
+<msg time="2025-06-27T00:42:55.778786" level="INFO">POST Response : url=http://localhost:3000/api/v1/auth/register 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '315', 'ETag': 'W/"13b-yAcx0IfbpoSv9kkhUwnnOnkMXIY"', 'Date': 'Fri, 27 Jun 2025 03:42:55 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"685e133f3cace397f6f22aa4","name":"Usuario Teste","email":"usuario1750995775@teste.com","role":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NWUxMzNmM2NhY2UzOTdmNmYyMmFhNCIsImlhdCI6MTc1MDk5NTc3NSwiZXhwIjoxNzUxMDgyMTc1fQ.KRFGUxpBR2FSmhGCSU97vdFRCXpcF6QTKRfpB8JSNPU"}} 
+ </msg>
+<msg time="2025-06-27T00:42:55.778878" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/api/v1/auth/register</arg>
+<arg>json=${user_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.601702" elapsed="0.177193"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-06-27T00:42:55.779378" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.779019" elapsed="0.000390"/>
+</kw>
+<arg>${user}</arg>
+<doc>Cadastra um novo usuário diretamente via API para preparar
+o ambiente de teste de forma rápida e confiável.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.601149" elapsed="0.178303"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:55.855944" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.779740" elapsed="0.076538"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:55.779573" elapsed="0.076938"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:55.858206" level="INFO">Fills the text 'usuario1750995775@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.857882" elapsed="0.052814"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:55.911258" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.910882" elapsed="0.005090"/>
+</kw>
+<arg>${user['email']}</arg>
+<arg>${user['password']}</arg>
+<status status="PASS" start="2025-06-27T00:42:55.856846" elapsed="0.059252"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:55.917062" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.916772" elapsed="0.031578"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:55.916446" elapsed="0.031993"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:56.140176" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:55.948855" elapsed="0.191423"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:56.143255" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.140400" elapsed="0.002936"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:56.147632" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.143441" elapsed="0.004252"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:55.948610" elapsed="0.199134"/>
+</kw>
+<kw name="Logout" owner="profile_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:56.148240" level="INFO">Clicks the element 'css=.btn-logout'.</msg>
+<arg>css=.btn-logout</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.148039" elapsed="0.077368"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:56.147873" elapsed="0.077624"/>
+</kw>
+<kw name="Verify Logged Out Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:56.228932" level="INFO">Waited for Element with selector nav &gt;&gt; text=Login at state visible</msg>
+<arg>nav &gt;&gt; text=Login</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.225925" elapsed="0.003103"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:56.231034" level="INFO">Waited for Element with selector nav &gt;&gt; text=Cadastrar at state visible</msg>
+<arg>nav &gt;&gt; text=Cadastrar</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.229125" elapsed="0.001991"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:56.225672" elapsed="0.005505"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:42:56.355043" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.231546" elapsed="0.123603"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:56.231341" elapsed="0.123875"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:54.673037" elapsed="1.682238"/>
+</test>
+<status status="PASS" start="2025-06-27T00:42:44.237136" elapsed="12.119999"/>
+</suite>
+<suite id="s1-s2" name="Test Booking Flow" source="/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/test_booking_flow.robot">
+<test id="s1-s2-t1" name="Scenario: View movie details" line="15">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:56.366550" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/6e16aa8b-f194-413f-8b11-94d063a8539e"}</msg>
+<msg time="2025-06-27T00:42:56.621198" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/6e16aa8b-f194-413f-8b11-94d063a8539e"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.366144" elapsed="0.255351"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:56.623744" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:56.630007" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:56.630070" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.622134" elapsed="0.007982"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:57.212110" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:56.630254" elapsed="0.581997"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:56.365951" elapsed="0.846380"/>
+</kw>
+<kw name="Navigate To Home" owner="home_page">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:57.324481" level="INFO">Successfully opened URL http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:57.212782" elapsed="0.111964"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:57.212516" elapsed="0.112376"/>
+</kw>
+<kw name="Select First Movie" owner="home_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:57.325834" level="INFO">Clicks the element 'css=.movie-grid .movie-card:first-child .btn'.</msg>
+<arg>css=.movie-grid .movie-card:first-child .btn</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:57.325521" elapsed="1.098696"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:57.325200" elapsed="1.099150"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:58.500293" level="INFO">Waited for Element with selector css=.movie-detail-header at state visible</msg>
+<arg>css=.movie-detail-header</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:58.424484" elapsed="0.075932"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:42:58.504004" level="INFO">Waited for Element with selector css=.sessions-container at state visible</msg>
+<arg>css=.sessions-container</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:58.500594" elapsed="0.003540"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:42:58.616620" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:42:58.504572" elapsed="0.112193"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:58.504354" elapsed="0.112483"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:56.365110" elapsed="2.251787"/>
+</test>
+<test id="s1-s2-t2" name="Scenario: Complete booking flow from start to finish" line="21">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:42:58.619937" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/4743cd17-8d7b-4a31-bad7-15506ca1dba0"}</msg>
+<msg time="2025-06-27T00:42:58.867933" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/4743cd17-8d7b-4a31-bad7-15506ca1dba0"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:58.619568" elapsed="0.248835"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:42:58.869651" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:42:58.874331" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:42:58.874394" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:42:58.868816" elapsed="0.005627"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:42:59.641390" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:42:58.874584" elapsed="0.767014"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:58.619375" elapsed="1.022318"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:42:59.642197" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995779@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:42:59.641913" elapsed="0.000306"/>
+</kw>
+<kw name="Register User Via API" owner="api_keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:59.642693" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-27T00:42:59.642598" elapsed="0.000193"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-27T00:42:59.643027" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.642880" elapsed="0.000164"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:42:59.824447" level="INFO">POST Request : url=http://localhost:3000/api/v1/auth/register 
+ path_url=/api/v1/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "Usuario Teste", "email": "usuario1750995779@teste.com", "password": "senha123"}' 
+ </msg>
+<msg time="2025-06-27T00:42:59.824551" level="INFO">POST Response : url=http://localhost:3000/api/v1/auth/register 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '315', 'ETag': 'W/"13b-oyHp5I7Arx25VxzpXVozsI4PlTE"', 'Date': 'Fri, 27 Jun 2025 03:42:59 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"685e13433cace397f6f22aca","name":"Usuario Teste","email":"usuario1750995779@teste.com","role":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NWUxMzQzM2NhY2UzOTdmNmYyMmFjYSIsImlhdCI6MTc1MDk5NTc3OSwiZXhwIjoxNzUxMDgyMTc5fQ.PriPPGFNaNP9tgjhmV_tZR5jhj3CyLYIaNqFRooj0zY"}} 
+ </msg>
+<msg time="2025-06-27T00:42:59.824699" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/api/v1/auth/register</arg>
+<arg>json=${user_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.643120" elapsed="0.181601"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-06-27T00:42:59.825297" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.824864" elapsed="0.000468"/>
+</kw>
+<arg>${user}</arg>
+<doc>Cadastra um novo usuário diretamente via API para preparar
+o ambiente de teste de forma rápida e confiável.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.642378" elapsed="0.183018"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:42:59.896513" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.825713" elapsed="0.071088"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:59.825528" elapsed="0.071556"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:59.898301" level="INFO">Fills the text 'usuario1750995779@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.898022" elapsed="0.053467"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:42:59.952209" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.951797" elapsed="0.006015"/>
+</kw>
+<arg>${user['email']}</arg>
+<arg>${user['password']}</arg>
+<status status="PASS" start="2025-06-27T00:42:59.897423" elapsed="0.060547"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:42:59.959516" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.958765" elapsed="0.038403"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:59.958310" elapsed="0.038944"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:00.200901" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:42:59.997648" elapsed="0.203414"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:00.204947" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:00.201236" elapsed="0.003802"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:00.207613" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:00.205158" elapsed="0.002637"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:59.997419" elapsed="0.210448"/>
+</kw>
+<kw name="Navigate To Home" owner="home_page">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:43:00.274239" level="INFO">Successfully opened URL http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:43:00.208475" elapsed="0.066218"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:00.208110" elapsed="0.066751"/>
+</kw>
+<kw name="Select First Movie" owner="home_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:00.275908" level="INFO">Clicks the element 'css=.movie-grid .movie-card:first-child .btn'.</msg>
+<arg>css=.movie-grid .movie-card:first-child .btn</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:00.275588" elapsed="1.083972"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:00.275187" elapsed="1.084463"/>
+</kw>
+<kw name="Select First Available Session" owner="movie_detail_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:01.360446" level="INFO">Clicks the element 'css=.session-times .session-card:first-child .session-button'.</msg>
+<arg>css=.session-times .session-card:first-child .session-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:01.360126" elapsed="1.133814"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:01.359882" elapsed="1.134139"/>
+</kw>
+<kw name="Select Available Seats" owner="seat_selection_page">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:02.494890" level="INFO">Clicks the element 'xpath=(//button[contains(@class, 'seat available')])[0+1]'.</msg>
+<arg>xpath=(//button[contains(@class, 'seat available')])[${i}+1]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:02.494672" elapsed="0.137138"/>
+</kw>
+<var name="${i}">0</var>
+<status status="PASS" start="2025-06-27T00:43:02.494592" elapsed="0.137289"/>
+</iter>
+<iter>
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:02.632470" level="INFO">Clicks the element 'xpath=(//button[contains(@class, 'seat available')])[1+1]'.</msg>
+<arg>xpath=(//button[contains(@class, 'seat available')])[${i}+1]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:02.632147" elapsed="0.032610"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2025-06-27T00:43:02.631994" elapsed="0.032829"/>
+</iter>
+<var>${i}</var>
+<value>${count}</value>
+<status status="PASS" start="2025-06-27T00:43:02.494443" elapsed="0.170421"/>
+</for>
+<arg>count=2</arg>
+<status status="PASS" start="2025-06-27T00:43:02.494202" elapsed="0.170721"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<arg>css=.seat.selected</arg>
+<arg>==</arg>
+<arg>2</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:02.665091" elapsed="0.002371"/>
+</kw>
+<kw name="Click Continue To Payment" owner="seat_selection_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:02.668044" level="INFO">Clicks the element 'css=.checkout-button'.</msg>
+<arg>css=.checkout-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:02.667811" elapsed="0.069904"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:02.667621" elapsed="0.070189"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:02.740516" level="INFO">Waited for Element with selector h1:text("Finalizar Compra") at state visible</msg>
+<arg>h1:text("Finalizar Compra")</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:02.737955" elapsed="0.002633"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:02.741002" level="INFO">Clicks the element 'css=.btn-checkout'.</msg>
+<arg>css=.btn-checkout</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:02.740713" elapsed="0.021535"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:03.550735" level="INFO">Waited for Element with selector text="Reserva Confirmada!" at state visible</msg>
+<arg>text="Reserva Confirmada!"</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:02.762417" elapsed="0.788585"/>
+</kw>
+<kw name="Go To My Reservations" owner="reservations_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:03.552845" level="INFO">Clicks the element 'text="Minhas Reservas"'.</msg>
+<arg>text="Minhas Reservas"</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:03.552260" elapsed="0.089920"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:03.551737" elapsed="0.090537"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:03.820379" level="INFO">Waited for Element with selector css=.reservation-card at state visible</msg>
+<arg>css=.reservation-card</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:03.642437" elapsed="0.178131"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:43:03.941179" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:43:03.821320" elapsed="0.119966"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:03.820947" elapsed="0.120402"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:42:58.618619" elapsed="5.322789"/>
+</test>
+<test id="s1-s2-t3" name="Scenario: Attempt to select an occupied seat" line="40">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:43:03.944728" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/88098a27-628a-47d9-a682-6225fd3a42d4"}</msg>
+<msg time="2025-06-27T00:43:04.192517" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/88098a27-628a-47d9-a682-6225fd3a42d4"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:03.944364" elapsed="0.248497"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:43:04.194947" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:43:04.202349" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:43:04.202419" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:04.193156" elapsed="0.009317"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:43:04.968640" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:43:04.202627" elapsed="0.766164"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:03.944177" elapsed="1.024697"/>
+</kw>
+<kw name="Navigate To Home" owner="home_page">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:43:05.087147" level="INFO">Successfully opened URL http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:43:04.969362" elapsed="0.118093"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:04.969072" elapsed="0.118473"/>
+</kw>
+<kw name="Select First Movie" owner="home_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:05.088512" level="INFO">Clicks the element 'css=.movie-grid .movie-card:first-child .btn'.</msg>
+<arg>css=.movie-grid .movie-card:first-child .btn</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:05.088180" elapsed="1.083275"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:05.087863" elapsed="1.083672"/>
+</kw>
+<kw name="Select First Available Session" owner="movie_detail_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:06.172162" level="INFO">Clicks the element 'css=.session-times .session-card:first-child .session-button'.</msg>
+<arg>css=.session-times .session-card:first-child .session-button</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:06.171909" elapsed="1.236267"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:06.171686" elapsed="1.236579"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-27T00:43:07.408602" level="INFO">${occupied_seat_locator} = (//button[contains(@class, 'seat occupied')])[1]</msg>
+<var>${occupied_seat_locator}</var>
+<arg>(//button[contains(@class, 'seat occupied')])[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-27T00:43:07.408420" elapsed="0.000198"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2025-06-27T00:43:07.410503" level="INFO">${count} = 0</msg>
+<var>${count}</var>
+<arg>${occupied_seat_locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:07.408715" elapsed="0.001813"/>
+</kw>
+<if>
+<branch type="IF" condition="${count} &gt; 0">
+<kw name="Get Element States" owner="Browser">
+<var>${states}</var>
+<arg>${occupied_seat_locator}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Get the active states from the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2025-06-27T00:43:07.410808" elapsed="0.000031"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${states}</arg>
+<arg>disabled</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-06-27T00:43:07.410905" elapsed="0.000025"/>
+</kw>
+<status status="NOT RUN" start="2025-06-27T00:43:07.410633" elapsed="0.000317"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-06-27T00:43:07.411111" level="INFO">Nenhum assento ocupado foi encontrado para testar. Teste considerado 'pass'.</msg>
+<arg>Nenhum assento ocupado foi encontrado para testar. Teste considerado 'pass'.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-06-27T00:43:07.411044" elapsed="0.000088"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:07.410975" elapsed="0.000176"/>
+</branch>
+<status status="PASS" start="2025-06-27T00:43:07.410608" elapsed="0.000560"/>
+</if>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:43:07.533567" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:43:07.411417" elapsed="0.122324"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:07.411289" elapsed="0.122590"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:03.943371" elapsed="3.590580"/>
+</test>
+<test id="s1-s2-t4" name="Scenario: View reservations page" line="54">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:43:07.537036" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/56129277-dda4-44ad-a11a-d9b6b1df21b8"}</msg>
+<msg time="2025-06-27T00:43:07.783888" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/56129277-dda4-44ad-a11a-d9b6b1df21b8"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:07.536662" elapsed="0.247358"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:43:07.784965" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:43:07.789373" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:43:07.789419" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:07.784163" elapsed="0.005294"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:43:08.401954" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:43:07.789570" elapsed="0.612559"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:07.536467" elapsed="0.865758"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:43:08.402652" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995788@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:43:08.402408" elapsed="0.000284"/>
+</kw>
+<kw name="Register User Via API" owner="api_keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:43:08.403143" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-27T00:43:08.403054" elapsed="0.000186"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-27T00:43:08.403596" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.403356" elapsed="0.000267"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:43:08.578237" level="INFO">POST Request : url=http://localhost:3000/api/v1/auth/register 
+ path_url=/api/v1/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "Usuario Teste", "email": "usuario1750995788@teste.com", "password": "senha123"}' 
+ </msg>
+<msg time="2025-06-27T00:43:08.578302" level="INFO">POST Response : url=http://localhost:3000/api/v1/auth/register 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '315', 'ETag': 'W/"13b-E2s7kdDAZnX01j/fbNUWbQ/IM20"', 'Date': 'Fri, 27 Jun 2025 03:43:08 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"685e134c3cace397f6f22b21","name":"Usuario Teste","email":"usuario1750995788@teste.com","role":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NWUxMzRjM2NhY2UzOTdmNmYyMmIyMSIsImlhdCI6MTc1MDk5NTc4OCwiZXhwIjoxNzUxMDgyMTg4fQ.6zCthfVGkcBTtkI98zLwdY0y3QO0DD18J6dQBQd8-yY"}} 
+ </msg>
+<msg time="2025-06-27T00:43:08.578395" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/api/v1/auth/register</arg>
+<arg>json=${user_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.403732" elapsed="0.174680"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-06-27T00:43:08.578949" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.578557" elapsed="0.000438"/>
+</kw>
+<arg>${user}</arg>
+<doc>Cadastra um novo usuário diretamente via API para preparar
+o ambiente de teste de forma rápida e confiável.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.402836" elapsed="0.176208"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:43:08.648636" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.579382" elapsed="0.069586"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:08.579187" elapsed="0.069971"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:43:08.650477" level="INFO">Fills the text 'usuario1750995788@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.650186" elapsed="0.052494"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:43:08.703226" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.702849" elapsed="0.005079"/>
+</kw>
+<arg>${user['email']}</arg>
+<arg>${user['password']}</arg>
+<status status="PASS" start="2025-06-27T00:43:08.649527" elapsed="0.058474"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:08.708709" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.708442" elapsed="0.040912"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:08.708169" elapsed="0.041265"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:08.948743" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.749837" elapsed="0.199091"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:08.952599" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.949103" elapsed="0.003603"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:08.955162" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.952849" elapsed="0.002380"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:08.749599" elapsed="0.205694"/>
+</kw>
+<kw name="Go To My Reservations" owner="reservations_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:08.955798" level="INFO">Clicks the element 'text="Minhas Reservas"'.</msg>
+<arg>text="Minhas Reservas"</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:08.955603" elapsed="0.091295"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:08.955424" elapsed="0.091560"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:09.049491" level="INFO">Waited for Element with selector css=.reservations-container at state visible</msg>
+<arg>css=.reservations-container</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:09.047182" elapsed="0.002381"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:43:09.168157" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:43:09.049936" elapsed="0.118321"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:09.049758" elapsed="0.118564"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:07.535704" elapsed="1.632675"/>
+</test>
+<status status="PASS" start="2025-06-27T00:42:56.359082" elapsed="12.811137"/>
+</suite>
+<suite id="s1-s3" name="Test Profile And Reservations" source="/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/test_profile_and_reservations.robot">
+<test id="s1-s3-t1" name="Scenario: Admin user should see the Administration link" line="13">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:43:09.177145" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/a81986cb-c21b-41b4-8c90-c12e909c4ada"}</msg>
+<msg time="2025-06-27T00:43:09.424399" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/a81986cb-c21b-41b4-8c90-c12e909c4ada"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:09.176787" elapsed="0.247868"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:43:09.425784" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:43:09.429803" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:43:09.429846" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:09.424847" elapsed="0.005037"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:43:10.008834" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:43:09.430001" elapsed="0.579001"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:09.176635" elapsed="0.832456"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:43:10.125931" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.009574" elapsed="0.116506"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:10.009286" elapsed="0.116873"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:43:10.126923" level="INFO">Fills the text 'adminuser@example.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.126585" elapsed="0.053103"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:43:10.180306" level="INFO">Fills the text 'password123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.179925" elapsed="0.005255"/>
+</kw>
+<arg>adminuser@example.com</arg>
+<arg>password123</arg>
+<status status="PASS" start="2025-06-27T00:43:10.126317" elapsed="0.058949"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:10.186127" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.185840" elapsed="0.030116"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:10.185503" elapsed="0.030567"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:10.411440" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.216463" elapsed="0.195124"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:10.415254" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.411740" elapsed="0.003588"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:10.420902" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.415429" elapsed="0.005546"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:10.216231" elapsed="0.204801"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:10.426772" level="INFO">Waited for Element with selector nav &gt;&gt; text=Administração at state visible</msg>
+<arg>nav &gt;&gt; text=Administração</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.421138" elapsed="0.005742"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:43:10.533780" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.427729" elapsed="0.106170"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:10.427450" elapsed="0.106522"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:09.175851" elapsed="1.358181"/>
+</test>
+<test id="s1-s3-t2" name="Scenario: Regular user should not see the Administration link" line="21">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:43:10.537785" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/14db3e7d-f231-4567-8a89-bb9b556b1801"}</msg>
+<msg time="2025-06-27T00:43:10.786163" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/14db3e7d-f231-4567-8a89-bb9b556b1801"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.537381" elapsed="0.248958"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:43:10.787368" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:43:10.791914" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:43:10.791962" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.786482" elapsed="0.005520"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:43:11.401400" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:43:10.792117" elapsed="0.609435"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:10.537167" elapsed="0.864473"/>
+</kw>
+<kw name="Get User Credentials" owner="test_data">
+<msg time="2025-06-27T00:43:11.402030" level="INFO">${user} = {'name': 'Usuario Teste', 'email': 'usuario1750995791@teste.com', 'password': 'senha123'}</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-27T00:43:11.401820" elapsed="0.000230"/>
+</kw>
+<kw name="Register User Via API" owner="api_keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:43:11.402526" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-27T00:43:11.402427" elapsed="0.000196"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-27T00:43:11.402868" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.402714" elapsed="0.000172"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-27T00:43:11.578009" level="INFO">POST Request : url=http://localhost:3000/api/v1/auth/register 
+ path_url=/api/v1/auth/register 
+ headers={'User-Agent': 'python-requests/2.32.4', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "Usuario Teste", "email": "usuario1750995791@teste.com", "password": "senha123"}' 
+ </msg>
+<msg time="2025-06-27T00:43:11.578067" level="INFO">POST Response : url=http://localhost:3000/api/v1/auth/register 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '315', 'ETag': 'W/"13b-nSSSYQXZGpXPEHXvmNtKTrxwMx0"', 'Date': 'Fri, 27 Jun 2025 03:43:11 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"685e134f3cace397f6f22b40","name":"Usuario Teste","email":"usuario1750995791@teste.com","role":"user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NWUxMzRmM2NhY2UzOTdmNmYyMmI0MCIsImlhdCI6MTc1MDk5NTc5MSwiZXhwIjoxNzUxMDgyMTkxfQ._0RUOiW3A-dtGbf1DiP6SXfk-GLDJQIe-CZvAaRb8ms"}} 
+ </msg>
+<msg time="2025-06-27T00:43:11.578155" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/api/v1/auth/register</arg>
+<arg>json=${user_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.402960" elapsed="0.175211"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-06-27T00:43:11.578716" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.578363" elapsed="0.000383"/>
+</kw>
+<arg>${user}</arg>
+<doc>Cadastra um novo usuário diretamente via API para preparar
+o ambiente de teste de forma rápida e confiável.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.402197" elapsed="0.176591"/>
+</kw>
+<kw name="Go To Login Page" owner="common_keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:43:11.655140" level="INFO">Successfully opened URL http://localhost:3002/login</msg>
+<arg>${BASE_URL}/login</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.579105" elapsed="0.076379"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:11.578907" elapsed="0.076738"/>
+</kw>
+<kw name="Fill Login Form" owner="login_page">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:43:11.656773" level="INFO">Fills the text 'usuario1750995791@teste.com' in the given field.</msg>
+<arg>id=email</arg>
+<arg>${email}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.656493" elapsed="0.052368"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-06-27T00:43:11.709683" level="INFO">Fills the text 'senha123' in the given field.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.709157" elapsed="0.041974"/>
+</kw>
+<arg>${user['email']}</arg>
+<arg>${user['password']}</arg>
+<status status="PASS" start="2025-06-27T00:43:11.655910" elapsed="0.095311"/>
+</kw>
+<kw name="Submit Login Form" owner="login_page">
+<kw name="Click" owner="Browser">
+<msg time="2025-06-27T00:43:11.751850" level="INFO">Clicks the element 'button[type=submit]'.</msg>
+<arg>button[type=submit]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.751598" elapsed="0.030527"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:11.751384" elapsed="0.030821"/>
+</kw>
+<kw name="Verify Logged In Header" owner="home_page">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:11.990480" level="INFO">Waited for Element with selector text="Minhas Reservas" at state visible</msg>
+<arg>text="Minhas Reservas"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.782603" elapsed="0.208477"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:11.998327" level="INFO">Waited for Element with selector text="Perfil" at state visible</msg>
+<arg>text="Perfil"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.991790" elapsed="0.006638"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:12.000902" level="INFO">Waited for Element with selector text="Sair" at state visible</msg>
+<arg>text="Sair"</arg>
+<arg>visible</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:11.998549" elapsed="0.002423"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:11.782368" elapsed="0.218657"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-06-27T00:43:12.002963" level="INFO">Waited for Element with selector nav &gt;&gt; text=Administração at state hidden</msg>
+<arg>nav &gt;&gt; text=Administração</arg>
+<arg>hidden</arg>
+<arg>5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-06-27T00:43:12.001137" elapsed="0.001893"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:43:12.103112" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:43:12.003383" elapsed="0.099834"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:12.003217" elapsed="0.100063"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:10.536244" elapsed="1.567113"/>
+</test>
+<test id="s1-s3-t3" name="Scenario: Unauthenticated user should be redirected from protected routes" line="30">
+<kw name="Setup" owner="common_keywords" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-06-27T00:43:12.106275" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/43925e4a-41e1-40d1-a9e7-d4097b36fbee"}</msg>
+<msg time="2025-06-27T00:43:12.370007" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/Users/cas/Personal Files/Projects/Trabalho/CompassUOL/PB/cinema-challenge-app-tests/frontend-tests/tests/log_results/browser/traces/temp/43925e4a-41e1-40d1-a9e7-d4097b36fbee"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:12.105874" elapsed="0.264588"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-06-27T00:43:12.372668" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2025-06-27T00:43:12.378659" level="INFO">Successfully created context. </msg>
+<msg time="2025-06-27T00:43:12.378705" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-06-27T00:43:12.370630" elapsed="0.008114"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-06-27T00:43:13.137010" level="INFO">Successfully initialized new page object and opened url: http://localhost:3002</msg>
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-06-27T00:43:12.378853" elapsed="0.758307"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:12.105691" elapsed="1.031552"/>
+</kw>
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:43:13.255277" level="INFO">Successfully opened URL http://localhost:3002/profile</msg>
+<arg>${BASE_URL}/profile</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:43:13.137416" elapsed="0.118150"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<arg>==</arg>
+<arg>${BASE_URL}/login</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" start="2025-06-27T00:43:13.256091" elapsed="0.082213"/>
+</kw>
+<kw name="Go To" owner="Browser">
+<msg time="2025-06-27T00:43:13.430155" level="INFO">Successfully opened URL http://localhost:3002/reservations</msg>
+<arg>${BASE_URL}/reservations</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-06-27T00:43:13.338472" elapsed="0.091981"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<arg>==</arg>
+<arg>${BASE_URL}/login</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" start="2025-06-27T00:43:13.430937" elapsed="0.081217"/>
+</kw>
+<kw name="Teardown" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-06-27T00:43:13.648429" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-27T00:43:13.512598" elapsed="0.135949"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:13.512384" elapsed="0.136230"/>
+</kw>
+<status status="PASS" start="2025-06-27T00:43:12.104963" elapsed="1.543712"/>
+</test>
+<status status="PASS" start="2025-06-27T00:43:09.172112" elapsed="4.478571"/>
+</suite>
+<status status="PASS" start="2025-06-27T00:42:44.226338" elapsed="29.426024"/>
+</suite>
+<statistics>
+<total>
+<stat pass="13" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="13" fail="0" skip="0">Tests</stat>
+<stat name="Test Authentication" id="s1-s1" pass="6" fail="0" skip="0">Tests.Test Authentication</stat>
+<stat name="Test Booking Flow" id="s1-s2" pass="4" fail="0" skip="0">Tests.Test Booking Flow</stat>
+<stat name="Test Profile And Reservations" id="s1-s3" pass="3" fail="0" skip="0">Tests.Test Profile And Reservations</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
