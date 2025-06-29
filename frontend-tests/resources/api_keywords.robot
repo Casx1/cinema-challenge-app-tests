@@ -7,7 +7,7 @@ Register User Via API
     ...              o ambiente de teste de forma rápida e confiável.
     [Arguments]    ${user_data}
 
-    Create Session    api_session    http://localhost:3000
+    Create Session    api_session    https://cinema-challenge-back-18cc.onrender.com
     &{headers}=      Create Dictionary    Content-Type=application/json
 
     ${response}=     Post On Session
