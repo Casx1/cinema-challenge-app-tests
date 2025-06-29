@@ -1,0 +1,108 @@
+name: CI - Automação de Testes (Backend & Frontend)
+
+on:
+  push:
+    branches: [ main, feature/ci-pipeline ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  backend-tests:
+    name: Testes de Backend (API)
+    runs-on: ubuntu-latest
+
+    env:
+      API_URL: ${{ secrets.PROD_API_URL }}
+      ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache de dependências (pip)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-backend-${{ hashFiles('**/backend-tests/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-backend-
+
+      - name: Instalar dependências do Backend
+        run: pip install -r backend-tests/requirements.txt
+
+      - name: Executar testes de Backend
+        working-directory: ./backend-tests
+        run: >
+          robot 
+          --variable BASE_URL:"${{ env.API_URL }}"
+          --variable ADMIN_EMAIL:"${{ env.ADMIN_EMAIL }}"
+          --variable ADMIN_PASSWORD:"${{ env.ADMIN_PASSWORD }}"
+          --variable USER_EMAIL:"${{ env.USER_EMAIL }}"
+          --variable USER_PASSWORD:"${{ env.USER_PASSWORD }}"
+          -d ./log_results tests/
+
+      - name: Upload dos resultados (Backend)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-results
+          path: backend-tests/log_results/
+
+  frontend-tests:
+    name: Testes de Frontend (UI)
+    needs: backend-tests
+    runs-on: ubuntu-latest
+
+    env:
+      FRONTEND_URL: ${{ secrets.PROD_FRONTEND_URL }}
+      VITE_API_URL: ${{ secrets.PROD_API_URL }} 
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache de dependências (pip)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-frontend-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-frontend-
+
+      - name: Instalar dependências de Backend e Frontend
+        run: |
+          pip install -r backend-tests/requirements.txt
+          pip install -r frontend-tests/requirements.txt
+
+      - name: Instalar navegadores (Playwright)
+        run: rfbrowser init
+
+      - name: Executar testes de Frontend
+        working-directory: ./frontend-tests
+        run: >
+          robot
+          --variable BROWSER_URL:"${{ env.FRONTEND_URL }}"
+          --variable HEADLESS:True
+          -d ./log_results tests/
+
+      - name: Upload dos resultados (Frontend)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-test-results
+          path: frontend-tests/log_results/
+
