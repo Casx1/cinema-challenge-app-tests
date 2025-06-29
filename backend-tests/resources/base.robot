@@ -13,9 +13,10 @@ Resource          ../variables/variables.robot
 
 *** Keywords ***
 Setup and Teardown
-    RequestsLibrary.Create Session    api    ${BASE_URL}
+    RequestsLibrary.Create Session    api    ${BASE_URL}    verify=${True}
     Log In Admin And Set Token
     Log In Regular User And Set Token
+
 
 Log In Admin And Set Token
     ${token}=    Login User    ${ADMIN_EMAIL}    ${ADMIN_PASSWORD}
