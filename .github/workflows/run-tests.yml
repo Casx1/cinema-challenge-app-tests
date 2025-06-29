@@ -1,34 +1,33 @@
-# Nome do workflow que aparecerá na aba "Actions" do GitHub
 name: CI - Automação de Testes (Backend & Frontend)
 
-# Gatilhos: o workflow será executado em pushes e pull requests para a branch 'main'
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/ci-pipeline ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
-# Definição dos jobs que serão executados
 jobs:
-  # Job para os testes de Backend (API)
   backend-tests:
-    # Nome do job que aparecerá na interface do GitHub Actions
     name: Testes de Backend (API)
-    # Ambiente de execução (máquina virtual)
     runs-on: ubuntu-latest
 
+    env:
+      API_URL: ${{ secrets.PROD_API_URL }}
+      ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+
     steps:
-      # 1. Clona o repositório para a máquina virtual
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      # 2. Configura o ambiente Python na versão 3.11
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Cache para acelerar a instalação de dependências em execuções futuras
       - name: Cache de dependências (pip)
         uses: actions/cache@v4
         with:
@@ -37,16 +36,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-backend-
 
-      # 4. Instala as dependências Python para os testes de backend
       - name: Instalar dependências do Backend
         run: pip install -r backend-tests/requirements.txt
 
-      # 5. Executa os testes de backend com Robot Framework
       - name: Executar testes de Backend
         working-directory: ./backend-tests
-        run: robot -d ./log_results tests/
+        run: >
+          robot 
+          --variable BASE_URL:"${{ env.API_URL }}"
+          --variable ADMIN_EMAIL:"${{ env.ADMIN_EMAIL }}"
+          --variable ADMIN_PASSWORD:"${{ env.ADMIN_PASSWORD }}"
+          --variable USER_EMAIL:"${{ env.USER_EMAIL }}"
+          --variable USER_PASSWORD:"${{ env.USER_PASSWORD }}"
+          -d ./log_results tests/
 
-      # 6. Faz o upload dos relatórios como artefatos (executa mesmo se os testes falharem)
       - name: Upload dos resultados (Backend)
         if: always()
         uses: actions/upload-artifact@v4
@@ -54,48 +57,52 @@ jobs:
           name: backend-test-results
           path: backend-tests/log_results/
 
-  # Job para os testes de Frontend (UI)
   frontend-tests:
     name: Testes de Frontend (UI)
+    needs: backend-tests
     runs-on: ubuntu-latest
 
+    env:
+      FRONTEND_URL: ${{ secrets.PROD_FRONTEND_URL }}
+      VITE_API_URL: ${{ secrets.PROD_API_URL }} 
+
     steps:
-      # 1. Clona o repositório
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      # 2. Configura o ambiente Python 3.11
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Cache para as dependências do frontend
       - name: Cache de dependências (pip)
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-frontend-${{ hashFiles('**/frontend-tests/requirements.txt') }}
+          key: ${{ runner.os }}-pip-frontend-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-frontend-
 
-      # 4. Instala as dependências Python para o frontend
-      - name: Instalar dependências do Frontend
-        run: pip install -r frontend-tests/requirements.txt
+      - name: Instalar dependências de Backend e Frontend
+        run: |
+          pip install -r backend-tests/requirements.txt
+          pip install -r frontend-tests/requirements.txt
 
-      # 5. Instala os navegadores necessários para a biblioteca Browser (Playwright)
       - name: Instalar navegadores (Playwright)
         run: rfbrowser init
 
-      # 6. Executa os testes de frontend com Robot Framework
       - name: Executar testes de Frontend
         working-directory: ./frontend-tests
-        run: robot -d ./tests/log_results tests/
+        run: >
+          robot
+          --variable BROWSER_URL:"${{ env.FRONTEND_URL }}"
+          --variable HEADLESS:True
+          -d ./log_results tests/
 
-      # 7. Faz o upload dos relatórios de frontend como artefatos
       - name: Upload dos resultados (Frontend)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: frontend-test-results
-          path: frontend-tests/tests/log_results/
+          path: frontend-tests/log_results/
+
